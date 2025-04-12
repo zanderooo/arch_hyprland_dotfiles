@@ -1,0 +1,118 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "spacing": 4,
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-center": [],
+    "modules-right": [
+        "custom/notification",
+        "pulseaudio",
+        "network",
+        "bluetooth",
+        "cpu",
+        "memory",
+        "temperature",
+        "backlight",
+        "battery",
+        "clock",
+        "tray",
+        "custom/keyboardlight"
+    ],
+
+    // Moduły z interaktywnością
+    "hyprland/workspaces": {
+        "format": "{}",
+        "format-icons": {}, // Wyłącz ikony - pokazuj tylko numery
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1"
+    },
+    "hyprland/window": {
+        "max-length": 60,
+        "separator": false
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰖁 Muted",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+    "network": {
+        "format-wifi": " {essid}",
+        "format-ethernet": "󰈀 {ipaddr}",
+        "format-disconnected": "󰖪 No Network",
+        "tooltip-format": "{ifname} ({signalStrength}%)",
+        "on-click": "nm-connection-editor", // GUI do zarządzania połączeniami
+        "on-click-right": "~/.config/waybar/scripts/wifi_menu.sh" // Skrypt do szybkiego przełączania WiFi
+    },
+    "bluetooth": {
+        "format": "",
+        "format-disabled": "󰂲",
+        "format-connected": " {device_alias}",
+        "on-click": "blueman-manager",
+        "on-click-right": "~/.config/waybar/scripts/toggle_bluetooth.sh"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "interval": 2,
+        "on-click": "kitty htop"
+    },
+    "memory": {
+        "format": " {used:0.1f}G",
+        "interval": 5,
+        "on-click": "kitty btop"
+    },
+    "temperature": {
+        "format": " {temperatureC}°C",
+        "critical-threshold": 80,
+        "on-click": "notify-send 'Temperature' '$(sensors | grep -A 0 Core)'"
+    },
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂"],
+        "format-charging": "󰂄 {capacity}%",
+        "interval": 10,
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "on-click": "powerprofilesctl set balanced", // Przełącz profile zasilania
+        "on-click-right": "powerprofilesctl set performance"
+    },
+    "clock": {
+        "format": "󰥔 {:%H:%M}",
+        "interval": 60,
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "gnome-calendar", // Lub inna aplikacja kalendarza
+        "on-click-right": "~/.config/waybar/scripts/date_menu.sh"
+    },
+    "tray": {
+        "spacing": 8,
+        "icon-size": 16
+    },
+    "custom/keyboardlight": {
+        "exec": "~/.config/waybar/scripts/keyboardlight.sh",
+        "return-type": "json",
+        "format": "󰌌 {}",
+        "interval": 2,
+        "on-click": "~/.config/waybar/scripts/keyboardlight.sh up",
+        "on-click-right": "~/.config/waybar/scripts/keyboardlight.sh down"
+    },
+    "custom/notification": {
+        "exec": "~/.config/waybar/scripts/notification.sh",
+        "on-click": "swaync-client -t -sw",
+        "return-type": "json"
+    }
+}

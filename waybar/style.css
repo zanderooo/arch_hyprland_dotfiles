@@ -1,0 +1,62 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Fira Code", "Font Awesome 6 Free";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(30, 30, 30, 0.95);
+    color: #e0e0e0;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+/* Pulpity (numery zamiast ikon) */
+#workspaces button {
+    padding: 0 10px;
+    background: transparent;
+    color: #888;
+    border-bottom: 2px solid transparent;
+    font-weight: bold;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    border-bottom: 2px solid #5e81ac;
+    background: rgba(90, 90, 90, 0.3);
+}
+
+#workspaces button.urgent {
+    color: #ff5555;
+}
+
+/* Moduły z interakcją */
+#window, #cpu, #memory, #temperature, #pulseaudio, #network, #bluetooth, #battery, #clock, #backlight, #custom-keyboardlight, #custom-notification {
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #e0e0e0;
+    transition: background-color 0.2s;
+}
+
+#network, #pulseaudio, #bluetooth, #battery, #clock, #custom-keyboardlight {
+    border-radius: 6px;
+}
+
+#network:hover, #pulseaudio:hover, #bluetooth:hover, #battery:hover, #clock:hover, #custom-keyboardlight:hover {
+    background: rgba(80, 80, 80, 0.6);
+}
+
+#temperature.critical {
+    color: #ff5555;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+
+#tray > * {
+    padding: 0 6px;
+    border-left: 1px solid rgba(100, 100, 100, 0.3);
+}

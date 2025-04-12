@@ -1,0 +1,10 @@
+show = drun
+prompt =   Search...
+width = 30%
+height = 40%
+location = center
+insensitive = true
+allow_images = true
+image_size = 24
+dynamic_lines = true
+line_count = 8

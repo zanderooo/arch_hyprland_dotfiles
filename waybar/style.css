@@ -1,62 +1,139 @@
+/* ~/.config/waybar/style.css */
 * {
     border: none;
-    border-radius: 0;
-    font-family: "Fira Code", "Font Awesome 6 Free";
+    border-radius: 0; /* Reset border radius */
+    /* Use a font that supports your icons (Nerd Fonts recommended) */
+    font-family: "JetBrains Mono Nerd Font", "Font Awesome 6 Free";
     font-size: 13px;
     min-height: 0;
+    font-weight: bold; /* Make font slightly bolder */
 }
 
 window#waybar {
-    background: rgba(30, 30, 30, 0.95);
-    color: #e0e0e0;
-    border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+    background: rgba(30, 30, 46, 0.85); /* Slightly different dark base, adjust alpha as needed */
+    color: #cdd6f4; /* Base text color (Catppuccin Macchiato text) */
+    border-radius: 6px; /* Apply rounding to the entire bar */
+    /* Remove border-bottom for a cleaner floating look */
+    /* border-bottom: 1px solid rgba(100, 100, 100, 0.3); */
+    margin: 5px 5px; /* Add margin to match Hyprland gaps_out */
 }
 
-/* Pulpity (numery zamiast ikon) */
+/* Reset Button Styles */
+button {
+    box-shadow: none;
+    text-shadow: none;
+    border: none;
+    background: none;
+}
+
+/* Workspaces */
 #workspaces button {
-    padding: 0 10px;
-    background: transparent;
-    color: #888;
-    border-bottom: 2px solid transparent;
-    font-weight: bold;
+    padding: 0 8px; /* Adjust padding */
+    margin: 3px 3px; /* Small margin around buttons */
+    color: #a6adc8; /* Inactive workspace color (Catppuccin Macchiato subtext0) */
+    border-radius: 4px; /* Slightly rounded workspace buttons */
+    transition: all 0.3s ease; /* Smooth transition */
 }
 
 #workspaces button.active {
-    color: #ffffff;
-    border-bottom: 2px solid #5e81ac;
-    background: rgba(90, 90, 90, 0.3);
+    background-color: rgba(159, 0, 255, 0.4); /* Use Hyprland active color with alpha */
+    color: #cdd6f4; /* Active text color */
+    border-bottom: 2px solid #9f00ff; /* Accent border */
 }
 
-#workspaces button.urgent {
-    color: #ff5555;
+#workspaces button.persistent {
+    color: #6c7086; /* Dimmer color for empty persistent workspaces (Catppuccin Macchiato overlay0) */
 }
 
-/* Moduły z interakcją */
-#window, #cpu, #memory, #temperature, #pulseaudio, #network, #bluetooth, #battery, #clock, #backlight, #custom-keyboardlight, #custom-notification {
+#workspaces button:hover {
+    background-color: rgba(106, 0, 255, 0.3); /* Use darker accent on hover */
+    color: #bac2de; /* Slightly lighter text on hover */
+}
+
+#workstates button.urgent {
+    background-color: #f38ba8; /* Urgent color (Catppuccin Macchiato red) */
+    color: #1e1e2e; /* Dark text on urgent */
+}
+
+/* Modules */
+#window,
+#clock,
+#cpu,
+#memory,
+#temperature,
+#pulseaudio,
+#network,
+#bluetooth,
+#battery,
+#backlight,
+#tray,
+#custom-keyboardlight,
+#custom-notification {
     padding: 0 10px;
-    margin: 0 2px;
-    color: #e0e0e0;
-    transition: background-color 0.2s;
+    margin: 3px 0px; /* Vertical margin */
+    color: #cdd6f4;
+    border-radius: 4px; /* Apply rounding to modules */
 }
 
-#network, #pulseaudio, #bluetooth, #battery, #clock, #custom-keyboardlight {
-    border-radius: 6px;
+/* Add slight background on hover for interactive modules */
+#pulseaudio:hover,
+#network:hover,
+#bluetooth:hover,
+#battery:hover,
+#clock:hover,
+#backlight:hover,
+#custom-keyboardlight:hover,
+#custom-notification:hover {
+    background-color: rgba(108, 112, 134, 0.3); /* Subtle hover background (Catppuccin Macchiato overlay0 alpha) */
 }
 
-#network:hover, #pulseaudio:hover, #bluetooth:hover, #battery:hover, #clock:hover, #custom-keyboardlight:hover {
-    background: rgba(80, 80, 80, 0.6);
+/* Specific Module Styling */
+#window {
+    font-weight: normal; /* Window title less bold */
+    color: #bac2de; /* Slightly dimmer color for window title (Catppuccin Macchiato subtext1) */
+}
+
+#clock {
+    /* color: #fab387; */ /* Optional: Different color for clock (Catppuccin Macchiato peach) */
+}
+
+#memory {
+    color: #89b4fa; /* Catppuccin Macchiato blue */
+}
+
+#cpu {
+    color: #a6e3a1; /* Catppuccin Macchiato green */
 }
 
 #temperature.critical {
-    color: #ff5555;
-    animation: blink 1s infinite;
+    background-color: #f38ba8; /* Red background for critical temp */
+    color: #1e1e2e; /* Dark text */
 }
 
-@keyframes blink {
-    50% { opacity: 0.3; }
+#battery.critical, #battery.warning {
+     color: #f38ba8; /* Red text for low battery */
+}
+#battery.charging, #battery.plugged {
+     color: #a6e3a1; /* Green text when charging/plugged */
 }
 
-#tray > * {
-    padding: 0 6px;
-    border-left: 1px solid rgba(100, 100, 100, 0.3);
+#network.disconnected {
+    color: #f38ba8; /* Red when disconnected */
+}
+
+#pulseaudio.muted {
+    color: #f38ba8;
+}
+
+#tray {
+    padding: 0 5px; /* Less padding for tray */
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #fab387; /* Needs attention background */
 }

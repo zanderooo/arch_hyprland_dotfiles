@@ -1,0 +1,92 @@
+# ~/.config/dunst/dunstrc
+
+[global]
+    # Display & Geometry
+    monitor = 0                     # Which monitor to display on
+    follow = mouse                  # Follow mouse pointer
+    width = 300                     # Width of notification
+    origin = top-right              # Position: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right
+    offset = 30x50                  # Offset from origin: Horizontal x Vertical (Adjust based on Waybar height + gaps)
+    scale = 0                       # Scaling factor for high DPI displays
+    notification_limit = 5          # Max number of notifications stacked
+    corner_radius = 6               # Rounded corners, matching Hyprland's decoration.rounding
+    transparency = 15               # Overall window transparency (0-100, 0 is opaque)
+
+    # Appearance & Font
+    font = JetBrains Mono 10        # Font for notification content
+    markup = full                   # Allow Pango markup (bold, italics, etc.)
+    format = "<b>%s</b>\n%b"        # Format: Summary (bold) newline Body
+    alignment = left                # Text alignment: left, center, right
+    vertical_alignment = center     # Vertical alignment: top, center, bottom
+    line_height = 0                 # Let Pango decide line height
+    word_wrap = yes                 # Wrap long lines
+    ellipsize = middle              # Where to truncate long lines if word_wrap is off
+    ignore_newline = no             # Treat newline chars in body as line breaks
+    separator_height = 1            # Height of separator between notifications
+    padding = 10                    # Padding between text and notification edge
+    horizontal_padding = 10         # Padding left/right of text
+    frame_width = 2                 # Border width around notification
+    separator_color = frame         # Separator color ('auto', 'frame', 'foreground', '#RRGGBB')
+    frame_color = "#333333aa"       # Frame color, matching Hyprland inactive border with alpha
+
+    # Icons
+    icon_position = left            # Icon position: left, right, off
+    min_icon_size = 0               # Minimum icon size (0 = use inherent size)
+    max_icon_size = 32              # Maximum icon size (scaled down if larger)
+    # If you prefer no icons for extreme minimalism:
+    # icon_position = off
+
+    # Behavior
+    shrink = no                     # Shrink window width if text is short
+    sort = yes                      # Sort notifications by urgency
+    idle_threshold = 120            # Seconds before idle state (pauses notifications)
+    indicate_hidden = yes           # Indicator for hidden notifications
+    show_age_threshold = 60         # Show time since notification if older than this (seconds, -1 disables)
+    stack_duplicates = true         # Stack identical notifications
+    hide_duplicate_count = no       # Show count for stacked duplicates
+    sticky_history = yes            # Keep notifications in history after viewing
+    history_length = 20             # Max history entries
+    show_indicators = no            # Show indicators for actions (e.g., 'u' for URL)
+    browser = xdg-open              # Browser for opening URLs
+    always_run_script = true        # Always run scripts, even if paused
+    title = Dunst                   # Window title
+    class = Dunst                   # Window class
+
+    # Progress bar (disabled for minimalism)
+    progress_bar = false
+    # progress_bar_height = 5
+    # progress_bar_frame_width = 0
+    # progress_bar_min_width = 150
+    # progress_bar_max_width = 300
+
+[urgency_low]
+    # Uses global background/foreground, subtly framed
+    background = "#2e3440"          # Dark background consistent with your theme
+    foreground = "#d8dee9"          # Light text color
+    frame_color = "#6a00ff99"       # Use the darker accent color with alpha for frame
+    timeout = 5                     # Seconds before auto-close
+
+[urgency_normal]
+    background = "#2e3440"          # Dark background consistent with your theme
+    foreground = "#e5e9f0"          # Slightly brighter text
+    frame_color = "#9f00ffee"       # Use the bright accent color for frame (matching Hyprland active border)
+    timeout = 8                     # Seconds before auto-close
+
+[urgency_critical]
+    background = "#bf616a"          # Critical color (Nord Red)
+    foreground = "#eceff4"          # Light text
+    frame_color = "#bf616a"         # Critical frame color, solid
+    timeout = 0                     # Stays until dismissed
+
+[shortcuts]
+    # Default shortcuts are often fine, keep yours or use defaults:
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave # ` (backtick)
+    context = ctrl+shift+period
+
+# You can add application-specific rules here if needed
+# Example:
+# [spotify]
+#     summary = Spotify
+#     icon = /path/to/spotify/icon.png
